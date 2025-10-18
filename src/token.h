@@ -126,12 +126,11 @@ typedef enum {
     NTT_SIZEOF,
     NTT_STATIC,
     NTT_STRUCT,
-    NTT_NTTDEF,
+    NTT_UNDEF,
     NTT_UNION,
     NTT_UNSIGNED,
     NTT_VOLATILE,
     NTT_WHILE,
-    // NTT_DEFER,
 
     NTT_FUNCTION,
     NTT_GOTO,
