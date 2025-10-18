@@ -80,10 +80,12 @@ static void nem_lexer_skip_white_space( NemLexer **lexer ) {
     while ( 1 ) {
         char ch = nem_lexer_peek( lexer );
         switch ( ch ) {
-            case ' ':
-            case '\t': ( *lexer )->column += 8 - ( ( *lexer )->column % 8 );
-            case '\v':
-            case '\f':
+            case ' ': [[fallthrough]];
+            case '\t':
+                ( *lexer )->column += 8 - ( ( *lexer )->column % 8 );
+                [[fallthrough]];
+            case '\v': [[fallthrough]];
+            case '\f': [[fallthrough]];
             case '\r': nem_lexer_next( lexer ); break;
             case '\n':
                 ( *lexer )->line++;
@@ -106,6 +108,7 @@ static void nem_lexer_skip_white_space( NemLexer **lexer ) {
                 } else {
                     return;
                 }
+                [[fallthrough]];
             default: return;
         }
     }
@@ -159,6 +162,7 @@ static bool nem_lexer_is_decimal( char ch ) { return '0' <= ch && ch <= '9'; }
 static bool nem_lexer_is_alphabet( char ch ) {
     return ( 'a' <= ch && ch <= 'z' ) || ( 'A' <= ch && ch <= 'Z' );
 }
+
 static bool nem_lexer_is_alpha_numeric( char ch ) {
     return nem_lexer_is_alphabet( ch ) || nem_lexer_is_decimal( ch );
 }
@@ -217,6 +221,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'b': {
@@ -232,6 +237,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'c': {
@@ -259,6 +265,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'd': {
@@ -280,6 +287,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'e': {
@@ -301,6 +309,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'f': {
@@ -322,6 +331,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'i': {
@@ -337,6 +347,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'g': {
@@ -346,6 +357,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'l': {
@@ -355,6 +367,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'r': {
@@ -370,6 +383,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 's': {
@@ -409,6 +423,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 't': {
@@ -424,6 +439,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'u': {
@@ -439,6 +455,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                     ( *lexer )->line, ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'v': {
@@ -454,6 +471,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                     ( *lexer )->line, ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         case 'w': {
@@ -463,6 +481,7 @@ static NemToken *nem_lexer_identifier_type( NemLexer   **lexer,
                                           ( *lexer )->column );
                 return token;
             }
+            [[fallthrough]];
         }
 
         default:
