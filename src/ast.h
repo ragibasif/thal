@@ -17,75 +17,54 @@ extern "C" {
 
 #include "common.h"
 
-typedef struct NemAST                      NemAST;
-typedef struct NemExprPrimary              NemExprPrimary;
-typedef struct NemExprPostfix              NemExprPostfix;
-typedef struct NemExprArgList              NemExprArgList;
-typedef struct NemExprUnary                NemExprUnary;
-typedef struct NemOpUnary                  NemOpUnary;
-typedef struct NemExprCast                 NemExprCast;
-typedef struct NemExprMult                 NemExprMult;
-typedef struct NemExprAdd                  NemExprAdd;
-typedef struct NemExprShift                NemExprShift;
-typedef struct NemExprRel                  NemExprRel;
-typedef struct NemExprEq                   NemExprEq;
-typedef struct NemExprBitAnd               NemExprBitAnd;
-typedef struct NemExprBitXor               NemExprBitXor;
-typedef struct NemExprBitOr                NemExprBitOr;
-typedef struct NemExprLogicAnd             NemExprLogicAnd;
-typedef struct NemExprLogicOr              NemExprLogicOr;
-typedef struct NemExprCond                 NemExprCond;
-typedef struct NemExprAssign               NemExprAssign;
-typedef struct NemOpAssign                 NemOpAssign;
-typedef struct NemExpr                     NemExpr;
-typedef struct NemExprConst                NemExprConst;
-typedef struct NemDecl                     NemDecl;
-typedef struct NemDeclSpec                 NemDeclSpec;
-typedef struct NemDeclInitList             NemDeclInitList;
-typedef struct NemDeclInit                 NemDeclInit;
-typedef struct NemSpecStorageClass         NemSpecStorageClass;
-typedef struct NemSpecType                 NemSpecType;
-typedef struct NemSpecStructOrUnion        NemSpecStructOrUnion;
-typedef struct NemStructOrUnion            NemStructOrUnion;
-typedef struct NemDeclStructList           NemDeclStructList;
-typedef struct NemDeclStruct               NemDeclStruct;
-typedef struct NemSpecQualList             NemSpecQualList;
-typedef struct NemStructDeclaratorList     NemStructDeclaratorList;
-typedef struct NemStructDeclarator         NemStructDeclarator;
-typedef struct NemSpecEnum                 NemSpecEnum;
-typedef struct NemEnumList                 NemEnumList;
-typedef struct NemEnum                     NemEnum;
-typedef struct NemTypeQual                 NemTypeQual;
-typedef struct NemDeclarator               NemDeclarator;
-typedef struct NemDirectDeclarator         NemDirectDeclarator;
-typedef struct NemPtr                      NemPtr;
-typedef struct NemTypeQualList             NemTypeQualList;
-typedef struct NemParamTypeList            NemParamTypeList;
-typedef struct NemParamList                NemParamList;
-typedef struct NemDeclParam                NemDeclParam;
-typedef struct NemIdentList                NemIdentList;
-typedef struct NemTypeName                 NemTypeName;
-typedef struct NemAbstractDeclarator       NemAbstractDeclarator;
-typedef struct NemDirectAbstractDeclarator NemDirectAbstractDeclarator;
-typedef struct NemInitializer              NemInitializer;
-typedef struct NemInitializerList          NemInitializerList;
-typedef struct NemStmt                     NemStmt;
-typedef struct NemStmtLabeled              NemStmtLabeled;
-typedef struct NemStmtCompound             NemStmtCompound;
-typedef struct NemDeclList                 NemDeclList;
-typedef struct NemStmtList                 NemStmtList;
-typedef struct NemExprStmt                 NemExprStmt;
-typedef struct NemStmtSelection            NemStmtSelection;
-typedef struct NemStmtIteration            NemStmtIteration;
-typedef struct NemStmtJump                 NemStmtJump;
-typedef struct NemTranslationUnit          NemTranslationUnit;
-typedef struct NemDeclExternal             NemDeclExternal;
-typedef struct NemFuncDef                  NemFuncDef;
+typedef enum {
+    NANT_ROOT,
+    NANT_EXPR,
+    NANT_STMT,
+    NANT_DECL,
+    // internal
+    NANT_COUNT,
 
-struct NemAST;
+} NemASTNodeType;
+
+typedef struct NemAST     NemAST;
+typedef struct NemASTExpr NemASTExpr;
+typedef struct NemASTStmt NemASTStmt;
+typedef struct NemASTDecl NemASTDecl;
+
+struct NemAST {
+    NemASTNodeType type;
+    union {
+        NemAST     *ast;
+        NemASTExpr *expr;
+        NemASTStmt *stmt;
+        NemASTDecl *decl;
+    } *data;
+};
+
+struct NemASTExpr {
+    char *data;
+};
+
+struct NemASTStmt {
+    char *data;
+};
+
+struct NemASTDecl {
+    char *data;
+};
 
 extern NemAST *nem_ast_create( void );
 extern void    nem_ast_destroy( NemAST **ast );
+
+extern NemASTExpr *nem_ast_expr_create( void );
+extern void        nem_ast_expr_destroy( NemASTExpr **expr );
+
+extern NemASTStmt *nem_ast_stmt_create( void );
+extern void        nem_ast_stmt_destroy( NemASTStmt **stmt );
+
+extern NemASTDecl *nem_ast_decl_create( void );
+extern void        nem_ast_decl_destroy( NemASTDecl **decl );
 
 #ifdef __cplusplus
 }
