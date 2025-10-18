@@ -32,11 +32,12 @@ void nem_token_test_helper( NemTokenType type, const char *lexeme, size_t size,
 }
 
 int main( int argc, char **argv ) {
-    nem_token_test_helper( NTT_ERROR, "illegal", strlen( "illegal" ), 100, 23,
-                           29 );
-    nem_token_test_helper( NTT_EOF, "EOF", strlen( "EOF" ), 200, 2432, 9 );
-    nem_token_test_helper( NTT_INT, "int", strlen( "int" ), 9274382, 2,
-                           734289 );
+    nem_token_test_helper( NTT_ERROR, "illegal", strlen( "illegal" ), 1, 1, 1 );
+    nem_token_test_helper( NTT_EOF, "EOF", strlen( "EOF" ), 1, 1, 1 );
+    nem_token_test_helper( NTT_INT, "int", strlen( "int" ), 1, 1, 1 );
+    nem_token_test_helper( NTT_ERROR, "@", strlen( "@" ), 1, 1, 1 );
+    nem_token_test_helper( NTT_ERROR, "\\", strlen( "\\" ), 1, 1, 1 );
+    nem_token_test_helper( NTT_ERROR, "`", strlen( "`" ), 1, 1, 1 );
 
     TEST_PASSED();
 }
