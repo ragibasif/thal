@@ -20,10 +20,10 @@
 
 #define NEM_HELP                                                               \
     "NAME\n"                                                                   \
-    "    nem - a lightweight C compiler frontend\n"                            \
+    "    nem - a lightweight C compiler\n"                                     \
     "\n"                                                                       \
-    "SYNOPSIS\n"                                                               \
-    "    nem [options] <file>\n"                                               \
+    "USAGE\n"                                                                  \
+    "    nem [options] <file>...\n"                                            \
     "\n"                                                                       \
     "DESCRIPTION\n"                                                            \
     "    The nem command compiles C source files with optional "               \
@@ -32,45 +32,52 @@
     "    macro definitions, and library linking similar to GCC or Clang.\n"    \
     "\n"                                                                       \
     "OPTIONS\n"                                                                \
-    "    -o, --output <file>\n"                                                \
-    "        Specify the output file to write to.\n"                           \
+    "    -c\n"                                                                 \
+    "        Only run preprocess, compile, and assemble steps to produce an "  \
+    "object "                                                                  \
+    "(.o) file.\n"                                                             \
     "\n"                                                                       \
-    "    -I, --include-dir <dir>\n"                                            \
-    "        Add <dir> to the list of directories searched for #include "      \
-    "files.\n"                                                                 \
+    "    -D <macro>=<value>\n"                                                 \
+    "        Define <macro> to <value> (or 1 if <value> omitted).\n"           \
     "\n"                                                                       \
-    "    -D, --define <name>=<value>\n"                                        \
-    "        Define a new object-like macro.\n"                                \
-    "\n"                                                                       \
-    "    -L, --library-path <dir>\n"                                           \
-    "        Add <dir> to the library search paths (passed as -L<dir> to the " \
-    "linker).\n"                                                               \
-    "\n"                                                                       \
-    "    -l, --library <name>\n"                                               \
-    "        Link against a shared library with <name> (passed as -l<name> "   \
-    "to the linker).\n"                                                        \
-    "\n"                                                                       \
-    "    -E, --preprocess-only\n"                                              \
+    "    -E\n"                                                                 \
     "        Stop after preprocessing and print the preprocessed source.\n"    \
     "\n"                                                                       \
-    "    -S, --compile-only\n"                                                 \
-    "        Stop after compilation and produce an assembly (.s) file.\n"      \
-    "\n"                                                                       \
-    "    -c, --no-link\n"                                                      \
-    "        Stop after assembling and produce an object (.o) file.\n"         \
-    "\n"                                                                       \
-    "        --dump-ast\n"                                                     \
-    "        Display the abstract syntax tree (AST) produced by the parser\n"  \
-    "        while compiling as usual.\n"                                      \
-    "\n"                                                                       \
-    "        --no-color\n"                                                     \
-    "        Print diagnostics without ANSI color formatting.\n"               \
+    "    -include <file>\n"                                                    \
+    "        Include file before parsing.\n"                                   \
     "\n"                                                                       \
     "    -h, --help\n"                                                         \
     "        Display this help information and exit.\n"                        \
     "\n"                                                                       \
-    "    -v, --version\n"                                                      \
-    "        Display version information and exit.\n"                          \
+    "    -I <dir>\n"                                                           \
+    "        Add directory to the end of the list of include search paths.\n"  \
+    "\n"                                                                       \
+    "    -l <name>\n"                                                          \
+    "        Link against a shared library with <name> (passed as -l<name> "   \
+    "to the linker).\n"                                                        \
+    "\n"                                                                       \
+    "    -L <dir>\n"                                                           \
+    "        Add <dir> to the library search paths (passed as -L<dir> to the " \
+    "linker).\n"                                                               \
+    "\n"                                                                       \
+    "    -o <file>\n"                                                          \
+    "        Specify the output file to write to.\n"                           \
+    "\n"                                                                       \
+    "    -S\n"                                                                 \
+    "        Only run preprocess and compilation steps,Stop after "            \
+    "compilation and produce an assembly (.s) file.\n"                         \
+    "\n"                                                                       \
+    "    -U <macro>\n"                                                         \
+    "        Undefine macro <macro>.\n"                                        \
+    "\n"                                                                       \
+    "    --version\n"                                                          \
+    "        Print version information and exit.\n"                            \
+    "\n"                                                                       \
+    "    -v\n"                                                                 \
+    "        Show commands to run and use verbose output.\n"                   \
+    "\n"                                                                       \
+    "    -w\n"                                                                 \
+    "        Suppress warnings.\n"                                             \
     "\n"                                                                       \
     "FILES\n"                                                                  \
     "    One or more C source files to be compiled.\n"                         \

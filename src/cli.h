@@ -29,9 +29,11 @@ typedef struct {
     bool   link;         // true by default, generate binary executable
     bool   color;        // true by default, show colors
     bool   trace;        // false by default, debug tracing
+    bool   warnings;     // suppress warnings
     char **shared_libs;  // shared libraries to be passed to linker (-l<name>)
     char **lib_dirs;     // directories to be searched during linking (-L<dir>)
     char **defines;      // definitions passed as cli args
+    char **undefines;    // undefined macros
 } NemCLI;
 
 extern NemCLI *nem_cli_create( int argc, char **argv );
